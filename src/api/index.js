@@ -4,7 +4,8 @@
  * You need to replace YOUR_API_KEY in the string associated with KEY with your actual API key
  */
 export const BASE_URL = 'https://api.harvardartmuseums.org';
-export const KEY = 'apikey=YOUR_API_KEY';
+export const KEY = 'apikey=3259bfaf-1df3-47c2-bf34-b5b4d008b189';
+console.log(process.env.API_KEY)
 
 /**
  * This will make a call to the API for a single term and value (e.g. "person", and "unknown"), and return the result
@@ -63,6 +64,9 @@ export async function fetchQueryResults({
 export async function fetchAllCenturies() {
   if (localStorage.getItem('centuries')) {
     return JSON.parse(localStorage.getItem('centuries'));
+    // const b = JSON.parse(localStorage.getItem('centuries'));
+    // console.log(b);
+    // return b;
   }
 
   const url = `${ BASE_URL }/century?${ KEY }&size=100&sort=temporalorder`;
@@ -96,6 +100,26 @@ export async function fetchAllClassifications() {
     const records = data.records;
 
     localStorage.setItem('classifications', JSON.stringify(records));
+
+    return records;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function fetchAllMedium() {
+  if (localStorage.getItem('medium')) {
+    return JSON.parse(localStorage.getItem('medium'));
+  }
+
+  const url = `${ BASE_URL }/medium?${ KEY }&size=100&sort=name`;
+
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    const records = data.records;
+
+    localStorage.setItem('medium', JSON.stringify(records));
 
     return records;
   } catch (error) {
