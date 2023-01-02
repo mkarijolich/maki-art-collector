@@ -1,11 +1,8 @@
 /**
  * This file features and exports all of your calls to the API
- * 
- * You need to replace YOUR_API_KEY in the string associated with KEY with your actual API key
  */
 export const BASE_URL = 'https://api.harvardartmuseums.org';
 export const KEY = 'apikey=3259bfaf-1df3-47c2-bf34-b5b4d008b189';
-console.log(process.env.API_KEY)
 
 /**
  * This will make a call to the API for a single term and value (e.g. "person", and "unknown"), and return the result
