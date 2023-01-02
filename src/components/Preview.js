@@ -1,18 +1,8 @@
 import React from 'react';
-
-/**
- * We need to import fetchQueryResultsFromURL since we will sometimes have urls in info.prev and info.next
- * which are query urls.
- */
 import { fetchQueryResultsFromURL } from '../api';
 
 const Preview = (props) => {
-  /**
-   * Destructure setSearchResults, setFeaturedResult, and setIsLoading from props
-   * and also destructure info and records from props.searchResults
-   * 
-   * You need info, records, setSearchResults, setFeaturedResult, and setIsLoading as available constants
-   */
+
   const {
     setSearchResults,
     setFeaturedResult,
@@ -20,18 +10,6 @@ const Preview = (props) => {
     searchResults: {info,records}
   } = props;
 
-  // const {
-  //   info,
-  //   records
-  // } = props.searchResults;
-  
-  
-
-  /**
-   * Don't touch this function, it's good to go.
-   * 
-   * It has to be defined inside the Preview component to have access to setIsLoading, setSearchResults, etc...
-   */
   async function fetchPage(pageUrl) {
     setIsLoading(true);
 
@@ -63,7 +41,6 @@ const Preview = (props) => {
   return (
   <aside id="preview">
     <header className="pagination">
-      {/* This button should be disabled if nothing is set in info.prev, and should call fetchPage with info.prev when clicked */}
       {
         <button 
         disabled={ !info.prev } 
@@ -71,7 +48,6 @@ const Preview = (props) => {
         onClick={()=>{fetchPage(info.prev)}}>Previous</button>
       }
       
-      {/* This button should be disabled if nothing is set in info.next, and should call fetchPage with info.next when clicked */}
       <button
         disabled={ !info.next }
         className="next"
@@ -92,11 +68,7 @@ const Preview = (props) => {
                 setFeaturedResult(record)
               }}>
               
-                {/* // if the record.primaryimageurl exists, show this: <img src={ record.primaryimageurl } alt={ record.description } />, otherwise show nothing  */}
-              {/* {renderPreviewImage(record)} */}
               {record.primaryimageurl ? <img src={ record.primaryimageurl } alt={ record.description } /> : null }
-              {/* // if the record.title exists, add this: <h3>{ record.title }</h3>, otherwise show this: <h3>MISSING INFO</h3> */}
-              {/* { renderPreviewTitle(record)} */}
               {record.title ? <h3>{ record.title }</h3> : <h3>MISSING INFO</h3>}
             </div>
           )}
